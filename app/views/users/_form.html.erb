@@ -1,0 +1,65 @@
+<%= form_with model: @user do |form| %>
+  <div>
+    <%= form.label :first_name %><br>
+    <%= form.text_field :first_name %>
+    <% @user.errors.full_messages_for(:first_name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :last_name %><br>
+    <%= form.text_field :last_name %><br>
+    <% @user.errors.full_messages_for(:last_name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :email %><br>
+    <%= form.text_field :email %><br>
+    <% @user.errors.full_messages_for(:email).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :mob_number %><br>
+    <%= form.text_field :mob_number %><br>
+    <% @user.errors.full_messages_for(:mob_number).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+
+  <div>
+    <%= form.label :dob %><br>
+    <%= form.date_select :dob, start_year: 1950, end_year: Time.now.year %>
+    <% @user.errors.full_messages_for(:dob).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <h5><%= form.label :gender %></h5>
+    <%= form.label :male, "male", :value => "Yes"  %>
+    <%= form.radio_button :male, "male", :checked => true%>
+    <%= form.label :female, "female", :value => "No" %>
+    <%= form.radio_button :female, "female" %><br>
+    <% @user.errors.full_messages_for(:gender).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :address %><br>
+    <%= form.text_area :address %><br>
+    <% @user.errors.full_messages_for(:dob).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
