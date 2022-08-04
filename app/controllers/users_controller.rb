@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token
   before_action :load_user, only: %i[update show, destroy]
 
 	def index
