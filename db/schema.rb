@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_133046) do
     t.datetime "dob"
     t.integer "gender"
     t.integer "mob_number"
+    t.integer "user_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

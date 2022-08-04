@@ -1,50 +1,54 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  before_action :load_user, only: %i[update show, destroy]
+
 	def index
 		@users = User.all
+
+    render json: { data: @users }
 	end
 	
   def show
-    @user = User.find(params[:id])
-  end
-
-  def new
-    @user = User.new
+    render json: { data: @user }
   end
 
   def create
-  	debugger
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to @user
+      render json: { data: @user }, status: :created
     else
-      render :new, status: :unprocessable_entity
+      render json: { error: @user.errors }, status: :unprocessable_entity
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
-
   def update
-    @user = User.find(params[:id])
-
     if @user.update(user_params)
-      redirect_to @user
+      render json: { data: @user }, status: :ok
     else
-      render :edit, status: :unprocessable_entity
+      render json: { error: @user.errors }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    redirect_to root_path, status: :see_other
+    if @user.destroy
+      render json: { message: "user Deleted" }, status: :ok
+    else
+      render json: { error: @user.errors }, status: :unprocessable_entity
+    end
   end
 
 	private
-    def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :address, :dob, :gender, :mob_number)
-    end
+
+  def load_user
+    @user = User.find_by(id: params[:id])
+
+    return if @user
+
+    render json: { message: "user with id #{params[:id]} not found" }
+  end
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :address, :dob, :gender, :mob_number, :user_type)
+  end
 end
