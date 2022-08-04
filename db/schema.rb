@@ -11,19 +11,24 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_08_04_133046) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "accounts", force: :cascade do |t|
-    t.float "balance"
-    t.float "point"
-    t.string "reward"
+    t.float "balance", default: 0.0
+    t.string "point"
+    t.string "reward", default: [], array: true
     t.integer "user_id"
+    t.string "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.float "amount"
+    t.float "amount", default: 0.0
     t.integer "status"
     t.integer "account_id"
+    t.string "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
