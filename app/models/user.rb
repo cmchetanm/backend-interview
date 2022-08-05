@@ -1,10 +1,12 @@
 class User < ApplicationRecord
 	enum gender: { male: 0, female: 1}
-	enum user_type: { client: 0, end_user: 1 }
+	enum user_type: { standard: 0, gold: 1, platinum: 2 }
 	
 	has_one :account, dependent: :destroy
-	has_many :rewards, dependent: :destroy
-	
+	has_and_belongs_to_many :rewards
+	belongs_to :client, class_name: 'User', foreign_key: :client_id, optional: true
+  has_many :customers, class_name: 'User', foreign_key: :client_id, dependent: :destroy
+
 	validates :email, uniqueness: true
 	validates :full_phone_number, uniqueness: true, presence: true
 	validate :valid_phone_number

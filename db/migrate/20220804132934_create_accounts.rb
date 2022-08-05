@@ -3,7 +3,6 @@ class CreateAccounts < ActiveRecord::Migration[7.0]
     create_table :accounts do |t|
       t.float :balance, default: 0.0
       t.string :point
-      t.string :reward, array: true, default: []
       t.integer :user_id
       t.string :message
       t.timestamps
