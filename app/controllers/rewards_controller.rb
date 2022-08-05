@@ -33,6 +33,15 @@ class RewardsController < ApplicationController
 		end
 	end
 
+	def point
+		user = User.find_by(id: params[:user_id])
+		if user.present?
+			render json: { data: user.account.points }
+		else
+			render json: { message: "user with id #{params[:user_id]} not found" }
+		end
+	end
+
 	private
 
 	def load_user

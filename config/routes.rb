@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :accounts, only: %i[update show]
   resources :rewards, only: %i[create index]
   post "/purchase_reward", to: 'rewards#purchase_reward'
+  post "/purchase_reward", to: 'rewards#purchase_reward'
+  get "/point", to: 'rewards#point'
 end
