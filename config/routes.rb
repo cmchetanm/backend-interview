@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :users
   resources :accounts, only: %i[update show]
-  resources :rewards, only: :create
+  resources :rewards, only: %i[create index]
   post "/purchase_reward", to: 'rewards#purchase_reward'
 end

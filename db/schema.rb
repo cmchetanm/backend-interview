@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_05_104756) do
   create_table "transactions", force: :cascade do |t|
     t.float "amount", default: 0.0
     t.integer "status"
+    t.integer "country_code"
     t.integer "account_id"
     t.string "message"
     t.datetime "created_at", null: false
