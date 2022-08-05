@@ -11,6 +11,10 @@ class CreatePointAndRewards
 				reward_award
 				#Create moview award
 				create_movie_award
+				#create standerd points
+				standard_points
+				#create quartly points
+				quarterly_bonus
 			end
 		end
 
@@ -43,5 +47,19 @@ class CreatePointAndRewards
 			return nil unless amount >= 1000
 			reward = Reward.find_by(name: 'Movie Tickets')
 			@user.rewards << reward
+		end
+
+		def standard_points
+			country_code = @user.country_code
+			counts = @transactions.where.not(country_code: country_code).count
+			counts.times { @account.points.create!(earning_point: 20) }
+		end
+
+		def quarterly_bonus
+			user_date = @user.created_at
+			months = user_date+3.months
+			amount = @transactions.where(created_at: user_date..months).sum(:amount)
+			return unless amount >= 2000
+			@account.points.create!(earning_point: 100)
 		end
 end
