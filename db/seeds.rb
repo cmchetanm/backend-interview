@@ -20,22 +20,23 @@ client_user = {
 	full_phone_number: 919826098260
 }
 
-rewards = [reward1, reward2, reward3]
-
-#Create the rewards
-rewards.each do |reward|
-	begin
-		Reward.create!(reward)
-	rescue => e
-		puts "#{e}"
-	end
-end
+user_rewards = [reward1, reward2, reward3]
 
 #Create Client User who can create rewards
 begin
 	User.create!(client_user)
 rescue => e
 	puts "#{e}"
+end
+
+user = User.find_by(email: "garima.joshi@gmail.com")
+#Create the rewards
+user_rewards.each do |reward|
+	begin
+		user.rewards.create!(reward)
+	rescue => e
+		puts "#{e}"
+	end
 end
 
 
