@@ -6,6 +6,8 @@ class CreateTransactions < ActiveRecord::Migration[7.0]
       t.integer :country_code
       t.integer :account_id
       t.string :message
+      t.boolean :point_creadit, default: false
+      t.integer :reward_name
       t.timestamps
     end
   end

@@ -5,11 +5,10 @@ class CreateBirthdayReward
 	end
 
 	private
-		def call
-			@users.each do |user|
-				account = user.account
-				account.reward.push("A Free Coffee reward")
-				reward.save!
-			end
+	def call
+		@users.each do |user|
+			reward = Reward.find_by(name: "Coffee")
+			user.rewards << reward
 		end
+	end
 end
