@@ -5,7 +5,7 @@ class CreatePointAndRewards
 				@account = account
 				@user = account.user
 				@transactions = account.transctions
-				#Create $100 Point on every 10 transations
+				#For every $100 the end user spends they receive 10 points
 				point_creadit
 				#Create 5% reward
 				reward_award
@@ -20,17 +20,10 @@ class CreatePointAndRewards
 
 		def point_creadit
 			every_tansactions = @transactions.where(point_creadit: false)
-			return nil unless every_tansactions.sum(:amount) >= 100
-			ids = []
-			amount = 0
-			every_tansactions.each do |object|
-				ids << object.id
-				amount = amount + object.amount
-				if amount >= 100
-					@account.points.create!(earning_point: 10)
-					Transaction.where(id: ids).update_all(point_creadit: true)
-					ids = []
-				end
+			return nil unless every_tansactions.where("amount >= ?", 100)
+			every_tansactions.each do |trans|
+				@account.points.create!(earning_point: 10)
+				trans.update(point_creadit: true)
 			end
 		end
 
