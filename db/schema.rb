@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_05_104756) do
   end
 
   create_table "points", force: :cascade do |t|
-    t.integer "points"
+    t.integer "earning_point"
     t.integer "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_05_104756) do
 
   create_table "rewards", force: :cascade do |t|
     t.string "name"
+    t.float "price"
     t.string "reward_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

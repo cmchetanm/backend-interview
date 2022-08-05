@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :load_user, only: %i[update show, destroy]
+  before_action :load_client, only: :create
+  before_action :load_user, only: %i[update show destroy]
 
 	def index
 		@users = User.all
@@ -12,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params.merge(client_id: @client.id))
 
     if @user.save
       render json: { data: @user }, status: :created
@@ -47,7 +48,15 @@ class UsersController < ApplicationController
     render json: { message: "user with id #{params[:id]} not found" }
   end
 
+  def load_client
+    @client = User.find_by(id: 1)
+
+    return if @client
+
+    render json: { message: "client is not exist please run `rake db:seed` to continue" }
+  end
+
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :address, :dob, :gender, :full_phone_number, :user_type)
+    params.require(:user).permit(:first_name, :last_name, :email, :address, :dob, :gender, :full_phone_number)
   end
 end
