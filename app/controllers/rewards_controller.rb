@@ -20,8 +20,9 @@ class RewardsController < ApplicationController
 	end
 
 	def purchase_reward
+		price = check_reward_discount
 		transaction = @user.account.transactions.create(
-			amount: @reward.price,
+			amount: price,
 			country_code: @user.country_code,
 			status: 0
 			)
@@ -43,6 +44,12 @@ class RewardsController < ApplicationController
 	end
 
 	private
+
+	def check_reward_discount
+		return @reward.price unless @user.rebate_reward
+		discount = (@reward.price)*(5/100.0)
+		(@reward.price) - (discount)
+	end
 
 	def load_user
     @user = User.find_by(id: params[:data][:user_id])

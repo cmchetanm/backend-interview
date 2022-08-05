@@ -13,7 +13,7 @@ class CreateUserType
 					user.update(user_type: "gold")
 				elsif point > 5000
 					user.update(user_type: "platinum")
-					reward = Reward.find_by(name: 'Airport Lounge Access')
+					reward = Reward.find_by(name: '4x Airport Lounge Access')
 					user.rewards << reward
 				end
 			end

@@ -7,7 +7,7 @@ reward2 = {
 }
 
 reward3 = {
-	name: 'Airport Lounge Access'
+	name: '4x Airport Lounge Access'
 }
 
 client_user = {
