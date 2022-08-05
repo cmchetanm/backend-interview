@@ -7,7 +7,9 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :address
       t.datetime :dob
       t.integer :gender
-      t.integer :mob_number
+      t.string :full_phone_number
+      t.integer :country_code
+      t.bigint :phone_number
       t.integer :user_type
       t.timestamps
     end

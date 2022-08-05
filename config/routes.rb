@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :users
   resources :accounts, only: %i[update show]
+  resources :rewards
 end

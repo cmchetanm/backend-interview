@@ -10,16 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_04_133046) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
+ActiveRecord::Schema[7.0].define(version: 2022_08_05_052253) do
   create_table "accounts", force: :cascade do |t|
     t.float "balance", default: 0.0
     t.string "point"
     t.string "reward", default: [], array: true
     t.integer "user_id"
     t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rewards", force: :cascade do |t|
+    t.string "name"
+    t.string "country_code"
+    t.float "print"
+    t.string "reward_type"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -40,7 +47,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_133046) do
     t.string "address"
     t.datetime "dob"
     t.integer "gender"
-    t.integer "mob_number"
+    t.string "full_phone_number"
+    t.integer "country_code"
+    t.bigint "phone_number"
     t.integer "user_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
