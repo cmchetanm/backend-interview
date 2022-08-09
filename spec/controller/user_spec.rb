@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   let!(:user) do
-    FactoryBot.create(:user, email: 'garima.joshi@gmail.com', full_phone_number: '9172' + "#{rand(10...99_999_999)}")
+    FactoryBot.create(:user, email: 'garima.joshi@gmail.com', full_phone_number: '919993' + "#{rand(10**5..10**6-1)}" )
   end
   describe 'POST/create' do
     it 'it should create' do
@@ -10,7 +10,7 @@ RSpec.describe UsersController, type: :controller do
         post :create,
              params: { use_routes: '/users',
                        user: { first_name: user.first_name, last_name: user.last_name, email: Faker::Internet.email, address: user.address,
-                               full_phone_number: '919993' + "#{rand(10...999_999)}" } }
+                               full_phone_number: '919993' + "#{rand(10**5..10**6-1)}" } }
       end.to change { Account.count }
     end
     it 'it should not create' do

@@ -6,7 +6,7 @@ FactoryBot.define do
     address { 'Indore' }
     dob { '12/12/2012' }
     gender { 'male' }
-    full_phone_number { '9178' + "#{rand(10...99_999_999)}" }
+    full_phone_number { '919993' + "#{rand(10**5..10**6-1)}" }
     user_type { 'standard' }
   end
 end

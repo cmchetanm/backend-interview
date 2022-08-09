@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe AccountsController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, full_phone_number: '919993' + "#{rand(10**5..10**6-1)}") }
   let(:account) { FactoryBot.create(:account, user_id: user.id) }
 
   describe 'Show index' do

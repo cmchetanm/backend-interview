@@ -21,6 +21,7 @@ Things you may want to cover:
    
   
 * How to run the test suite
+  **bundle exec rspec
 * 
   This is postman collection
   **https://www.getpostman.com/collections/b0bd8beb436b908f074b**

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe RewardsController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, full_phone_number: '919993' + "#{rand(10**5..10**6-1)}") }
   describe 'GET /index' do
     it 'get list of records(awards)' do
       get :index, params: { use_routes: '/rewards' }
@@ -11,7 +11,7 @@ RSpec.describe RewardsController, type: :controller do
 
   describe 'POST /create' do
     it 'it should create reward' do
-      FactoryBot.create(:user, email: 'garima.joshi@gmail.com')
+      FactoryBot.create(:user, email: 'garima.joshi@gmail.com', full_phone_number: '919993' + "#{rand(10**5..10**6-1)}")
       post :create, params: { use_routes: '/rewards', reward: { name: Faker::Name.name, price: 500 } }
       expect(response.message).to eq('OK')
     end
